@@ -7,6 +7,8 @@ const departmentController = require("./controllers/departmentController");
 const employeeController = require("./controllers/employeeController");
 const shiftController = require("./controllers/shiftController");
 const employeeShiftsController = require("./controllers/employeeShiftsController");
+const loginController = require("./controllers/loginController");
+const { requireAuth } = require("./middleware/authMiddleware");
 
 const app = express();
 const PORT = 3000;
@@ -17,10 +19,11 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/users", userController);
-app.use("/departments", departmentController);
+app.use("/departments", requireAuth, departmentController);
 app.use("/employees", employeeController);
 app.use("/shifts", shiftController);
 app.use("/employeeShifts", employeeShiftsController);
+app.use("/login", loginController);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

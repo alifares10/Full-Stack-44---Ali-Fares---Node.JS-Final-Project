@@ -51,18 +51,16 @@ const updateDepartment = async (id, department) => {
 
 const deleteDepartment = async (id) => {
   try {
-    //delete department manager
     const department = await departmentRepo.getDepartmentById(id);
-    // await employeeService.deleteEmployee(department.manager);
 
     // check if department has employees
-    // const employees = await employeeRepo.getAllEmployees({ departmentID: id });
-    // if (employees.length > 0) {
-    //   //delete the employees
-    //   employees.forEach(async (employee) => {
-    //     await employeeService.deleteEmployee(employee._id);
-    //   });
-    // }
+    const employees = await employeeRepo.getAllEmployees({ departmentID: id });
+    if (employees.length > 0) {
+      //delete the employees
+      employees.forEach(async (employee) => {
+        await employeeService.deleteEmployee(employee._id);
+      });
+    }
 
     //delete department
     const deletedDepartment = await departmentRepo.deleteDepartment(id);
