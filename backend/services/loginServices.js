@@ -19,7 +19,7 @@ const login = async (login) => {
       throw new Error("Invalid username or email");
     }
     const token = jwt.sign({ id: username }, Secret, { expiresIn: TokenAge });
-    return token;
+    return { token, user };
   } catch (error) {
     throw new Error(error);
   }
