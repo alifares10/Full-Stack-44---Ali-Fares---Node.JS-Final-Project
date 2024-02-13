@@ -10,6 +10,7 @@ const userSchema = new schema(
     numOfActions: {
       type: Number,
       required: true,
+      default: 10,
     },
   },
   {

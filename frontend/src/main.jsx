@@ -8,6 +8,8 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./pages/Home";
 import LogIn from "./pages/Login";
 import Employees from "./pages/Employees";
+import EditEmployee from "./pages/EditEmployee.jsx";
+import Shifts from "./pages/Shifts.jsx";
 import NotFound from "./pages/NotFound";
 import ProtectedRoutes from "./components/ProtectedRoutes.jsx";
 
@@ -35,6 +37,24 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoutes>
             <Employees />
+          </ProtectedRoutes>
+        ),
+        errorElement: <NotFound />,
+      },
+      {
+        path: "/shifts",
+        element: (
+          <ProtectedRoutes>
+            <Shifts />
+          </ProtectedRoutes>
+        ),
+        errorElement: <NotFound />,
+      },
+      {
+        path: "/employees/:id",
+        element: (
+          <ProtectedRoutes>
+            <EditEmployee />
           </ProtectedRoutes>
         ),
         errorElement: <NotFound />,

@@ -16,6 +16,11 @@ const Header = () => {
   const navigate = useNavigate();
   const name = sessionStorage.getItem("name");
 
+  const handleLogout = async () => {
+    sessionStorage.clear();
+    navigate("/login");
+  };
+
   return (
     <div>
       <Navbar isBordered>
@@ -30,11 +35,14 @@ const Header = () => {
           </Button>
         </NavbarItem>
         <NavbarItem className=" flex">
-          <Button auto>About</Button>
+          <Button auto>
+            {" "}
+            <Link to={"/shifts"}>Shifts</Link>
+          </Button>
         </NavbarItem>
         <NavbarItem className=" flex">
-          <Button auto>
-            <Link to={"/login"}> Log Out</Link>
+          <Button onClick={handleLogout} auto>
+            Log Out
           </Button>
         </NavbarItem>
         <NavbarContent justify="end"></NavbarContent>

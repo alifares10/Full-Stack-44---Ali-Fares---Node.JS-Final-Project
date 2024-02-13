@@ -42,9 +42,13 @@ const updateShift = async (id, shift) => {
 const getShiftEmployees = async (id) => {
   try {
     const shift = await shiftRepo.getShiftById(id);
-    const employees = await employeeRepo.getAllEmployees({
-      _id: { $in: shift.employees },
-    });
+    // const employees = await employeeRepo.getAllEmployees({
+    //   _id: { $in: shift.employees },
+    // });
+    const employeesShifts = await employeeShiftsRepo.getAllEmployeeShifts();
+    const employees = employeesShifts.filter((employee) =>
+      employee.shifts.includes(id)
+    );
     return employees;
   } catch (error) {
     throw new Error(error);

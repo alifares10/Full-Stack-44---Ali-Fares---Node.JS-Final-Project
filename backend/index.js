@@ -20,9 +20,9 @@ app.use(express.json());
 
 app.use("/users", userController);
 app.use("/departments", requireAuth, departmentController);
-app.use("/employees", employeeController);
-app.use("/shifts", shiftController);
-app.use("/employeeShifts", employeeShiftsController);
+app.use("/employees", requireAuth, employeeController);
+app.use("/shifts", requireAuth, shiftController);
+app.use("/employeeShifts", requireAuth, employeeShiftsController);
 app.use("/login", loginController);
 
 app.listen(PORT, () => {

@@ -43,4 +43,13 @@ router.put("/:id", async (req, res) => {
   }
 });
 
+router.get("/:id/employees", async (req, res) => {
+  try {
+    const employees = await shiftService.getShiftEmployees(req.params.id);
+    res.status(200).json(employees);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
 module.exports = router;

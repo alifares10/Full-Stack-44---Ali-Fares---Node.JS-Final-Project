@@ -17,6 +17,31 @@ const LogIn = () => {
       });
       if (res.status === 200) {
         const data = res.data;
+        //check if this is the first time logging in
+        const user = await axios.get(
+          `http://localhost:3001/users?fullName=${data.userInfo.name}`,
+          {
+            headers: {
+              "x-access-token": data.accessToken,
+            },
+          }
+        );
+        if (user.data.length === 0) {
+          //create the user in mongodb
+          const response = await axios.post(
+            "http://localhost:3001/users",
+            {
+              fullName: data.userInfo.name,
+            },
+            {
+              headers: {
+                "x-access-token": data.accessToken,
+              },
+            }
+          );
+          console.log("First time log in", response.data);
+        }
+        // save data to session storage
         sessionStorage.setItem("Username", data.userInfo.username);
         sessionStorage.setItem("Email", data.userInfo.email);
         sessionStorage.setItem("name", data.userInfo.name);
