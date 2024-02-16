@@ -17,7 +17,6 @@ const AddEmployessToShift = (info) => {
   const [employeeId, setEmployeeId] = useState("");
   const onSubmit = async (e) => {
     e.preventDefault();
-    console.log(employeeId);
     const shiftId = info.shift._id;
 
     try {

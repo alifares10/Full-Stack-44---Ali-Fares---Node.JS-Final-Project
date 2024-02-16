@@ -115,7 +115,6 @@ const getEmployeeShifts = async (id) => {
         info.push(shiftInfo);
       })
     );
-    console.log(info);
     return info;
   } catch (error) {
     throw new Error(error);

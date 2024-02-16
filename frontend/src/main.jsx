@@ -12,6 +12,7 @@ import EditEmployee from "./pages/EditEmployee.jsx";
 import Shifts from "./pages/Shifts.jsx";
 import NotFound from "./pages/NotFound";
 import ProtectedRoutes from "./components/ProtectedRoutes.jsx";
+import AddEmployee from "./pages/AddEmployee.jsx";
 
 const router = createBrowserRouter([
   {
@@ -55,6 +56,15 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoutes>
             <EditEmployee />
+          </ProtectedRoutes>
+        ),
+        errorElement: <NotFound />,
+      },
+      {
+        path: "/employees/add",
+        element: (
+          <ProtectedRoutes>
+            <AddEmployee />
           </ProtectedRoutes>
         ),
         errorElement: <NotFound />,
