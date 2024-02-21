@@ -41,6 +41,12 @@ const Header = () => {
           </Button>
         </NavbarItem>
         <NavbarItem className=" flex">
+          <Button auto>
+            {" "}
+            <Link to={"/departments"}>Departments</Link>
+          </Button>
+        </NavbarItem>
+        <NavbarItem className=" flex">
           <Button onClick={handleLogout} auto>
             Log Out
           </Button>

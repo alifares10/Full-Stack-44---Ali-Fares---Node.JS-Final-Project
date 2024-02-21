@@ -195,7 +195,6 @@ const EditEmployee = () => {
         <h1>Loading...</h1>
       ) : (
         <>
-          {" "}
           <form className="grid grid-cols-3 border p-2 " onSubmit={onSubmit}>
             <h1 className="dark:font-extrabold">Edit Employee Data</h1>
             <div className="flex flex-col">

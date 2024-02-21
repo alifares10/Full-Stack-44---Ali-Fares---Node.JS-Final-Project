@@ -9,8 +9,7 @@ const departmentSchema = new schema(
     },
     manager: {
       type: String,
-      required: true,
-      default: "Unassigned",
+      default: "",
     },
   },
   {

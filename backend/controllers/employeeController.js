@@ -73,4 +73,16 @@ router.put("/:id/shifts", async (req, res) => {
   }
 });
 
+router.put("/:id/department", async (req, res) => {
+  try {
+    const updatedEmployee = await employeeService.transferDepartment(
+      req.params.id,
+      req.body.newDepartment
+    );
+    res.status(200).json(updatedEmployee);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
 module.exports = router;

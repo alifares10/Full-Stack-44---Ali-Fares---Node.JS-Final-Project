@@ -40,7 +40,6 @@ const AddEmployee = () => {
       startWorkYear,
       departmentID,
     };
-    console.log(newEmployee);
     try {
       const res = await axios.post(
         "http://localhost:3001/employees",
@@ -89,17 +88,13 @@ const AddEmployee = () => {
             ))}
           </select>
         </div>
-        <Button
-          className="flex my-1 items-center mx-auto justify-center "
-          type="submit"
-        >
-          Add Employee
-        </Button>
+        <div className="flex gap-2 p-2">
+          <Button type="submit">Add Employee</Button>
+          <Button color="danger" auto>
+            <Link to="/employees">Cancel</Link>
+          </Button>
+        </div>
       </form>
-
-      <Button color="danger" auto>
-        <Link to="/employees">Cancel</Link>
-      </Button>
     </div>
   );
 };

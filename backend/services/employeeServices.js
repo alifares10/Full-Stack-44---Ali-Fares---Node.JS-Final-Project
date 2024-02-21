@@ -153,6 +153,42 @@ const addEmployeeToShift = async (id, info) => {
   }
 };
 
+const transferDepartment = async (id, newDepartment) => {
+  try {
+    //check if employee exists
+    const employee = await employeeRepo.getEmployeeById(id);
+    if (!employee) {
+      throw new Error("Employee not found");
+    }
+    //check if department exists
+    const department = await departmentRepo.getDepartmentById(newDepartment);
+    if (!department) {
+      throw new Error("Department not found");
+    }
+    //check if employee is a manager
+    const departments = await departmentRepo.getAllDepartments({
+      manager: id,
+    });
+    if (departments.length > 0) {
+      //remove employee from manager
+      await Promise.all(
+        departments.map(async (department) => {
+          await departmentRepo.updateDepartment(department._id, {
+            manager: "",
+          });
+        })
+      );
+    }
+    //transfer employee to new department
+    const updatedEmployee = await employeeRepo.updateEmployee(id, {
+      departmentID: newDepartment,
+    });
+    return updatedEmployee;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
 module.exports = {
   getAllEmployees,
   getEmployeeById,
@@ -161,4 +197,5 @@ module.exports = {
   deleteEmployee,
   getEmployeeShifts,
   addEmployeeToShift,
+  transferDepartment,
 };

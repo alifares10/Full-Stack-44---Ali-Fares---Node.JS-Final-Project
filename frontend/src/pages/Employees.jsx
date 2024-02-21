@@ -10,7 +10,6 @@ const Employees = () => {
   const [employeeShifts, setEmployeeShifts] = useState([]);
   const [departments, setDepartments] = useState([]);
   const [filteredEmployees, setFilteredEmployees] = useState([]);
-  let test = [];
 
   const token = sessionStorage.getItem("accessToken");
 
@@ -92,32 +91,32 @@ const Employees = () => {
             </select>
           </div>
           {filteredEmployees.length === 0 ? (
-            <table className="border w-full text-left">
+            <table className="border w-full text-left table-auto">
               <thead>
                 <tr>
-                  <th className="p-4"> Name</th>
+                  <th className="p-4 border"> Name</th>
 
-                  <th>Department ID</th>
-                  <th>Shifts</th>
+                  <th className="border p-4">Department ID</th>
+                  <th className="border p-4">Shifts</th>
                 </tr>
               </thead>
               <tbody>
                 {employees.map((employee) => (
                   <tr key={employee._id}>
-                    <td className="p-4">
+                    <td className="p-4 border">
                       <Link to={`/employees/${employee._id}`}>
                         {employee.firstName} {employee.lastName}
                       </Link>
                     </td>
 
-                    <td>
+                    <td className="border">
                       {departments.map((department) => {
                         if (department._id === employee.departmentID) {
                           return department.name;
                         }
                       })}
                     </td>
-                    <td>
+                    <td className="border">
                       <ViewEmployeeShifts employee={employee} />
                     </td>
                   </tr>
@@ -125,32 +124,32 @@ const Employees = () => {
               </tbody>
             </table>
           ) : (
-            <table className="border w-full text-left">
+            <table className="border w-full text-left table-auto">
               <thead>
                 <tr>
-                  <th className="p-4"> Name</th>
+                  <th className="p-4 border"> Name</th>
 
-                  <th>Department ID</th>
-                  <th>Shifts</th>
+                  <th className="p-4 border">Department ID</th>
+                  <th className="p-4 border">Shifts</th>
                 </tr>
               </thead>
               <tbody>
                 {filteredEmployees.map((employee) => (
                   <tr key={employee._id}>
-                    <td className="p-4">
+                    <td className="p-4 border">
                       <Link to={`/employees/${employee._id}`}>
                         {employee.firstName} {employee.lastName}
                       </Link>
                     </td>
 
-                    <td>
+                    <td className="p-4 border">
                       {departments.map((department) => {
                         if (department._id === employee.departmentID) {
                           return department.name;
                         }
                       })}
                     </td>
-                    <td>
+                    <td className="p-4 border">
                       <ViewEmployeeShifts employee={employee} />
                     </td>
                   </tr>
