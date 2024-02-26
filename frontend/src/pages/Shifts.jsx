@@ -19,6 +19,7 @@ const Shifts = () => {
           headers: {
             "x-access-token": token,
           },
+          withCredentials: true,
         });
         if (res.status === 200) {
           setShifts((prevData) => res.data);
@@ -40,6 +41,7 @@ const Shifts = () => {
           headers: {
             "x-access-token": token,
           },
+          withCredentials: true,
         });
         if (res.status === 200) {
           setEmployees((prevData) => res.data);

@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.post("/", async (req, res) => {
   try {
-    const data = await loginServcice.login(req.body);
+    const data = await loginServcice.login(req, res);
     res.status(200).json({ accessToken: data.token, userInfo: data.user });
   } catch (error) {
     res.status(400).json({ message: error.message });

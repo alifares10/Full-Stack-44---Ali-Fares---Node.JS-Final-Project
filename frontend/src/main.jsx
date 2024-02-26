@@ -1,6 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-// import App from "./App.jsx";
 import "./index.css";
 import { NextUIProvider } from "@nextui-org/react";
 import Header from "./components/Header.jsx";
@@ -16,6 +15,7 @@ import AddEmployee from "./pages/AddEmployee.jsx";
 import Departments from "./pages/Departments.jsx";
 import EditDepartment from "./pages/EditDepartment.jsx";
 import AddDepartment from "./pages/addDepartment.jsx";
+import Users from "./pages/Users.jsx";
 
 const router = createBrowserRouter([
   {
@@ -95,6 +95,15 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoutes>
             <AddDepartment />
+          </ProtectedRoutes>
+        ),
+        errorElement: <NotFound />,
+      },
+      {
+        path: "/users",
+        element: (
+          <ProtectedRoutes>
+            <Users />
           </ProtectedRoutes>
         ),
         errorElement: <NotFound />,

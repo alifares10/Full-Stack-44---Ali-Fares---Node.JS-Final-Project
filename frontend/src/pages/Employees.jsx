@@ -20,6 +20,7 @@ const Employees = () => {
           headers: {
             "x-access-token": token,
           },
+          withCredentials: true,
         });
         if (res.status === 200) {
           setEmployees((prevData) => res.data);
@@ -28,6 +29,11 @@ const Employees = () => {
         }
       } catch (error) {
         console.log(error);
+        //if the user has reached the maximum number of actions
+        if (error.response.status === 403) {
+          window.location.href = "http://localhost:5173/login";
+        }
+        alert(error.response.data.message);
       }
     };
 
@@ -41,6 +47,7 @@ const Employees = () => {
           headers: {
             "x-access-token": token,
           },
+          withCredentials: true,
         });
         if (res.status === 200) {
           setDepartments((prevData) => res.data);

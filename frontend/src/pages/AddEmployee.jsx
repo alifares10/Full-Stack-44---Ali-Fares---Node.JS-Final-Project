@@ -14,6 +14,7 @@ const AddEmployee = () => {
           headers: {
             "x-access-token": token,
           },
+          withCredentials: true,
         });
         if (res.status === 200) {
           setDepartments((prevData) => res.data);
@@ -48,6 +49,7 @@ const AddEmployee = () => {
           headers: {
             "x-access-token": token,
           },
+          withCredentials: true,
         }
       );
       if (res.status === 201) {

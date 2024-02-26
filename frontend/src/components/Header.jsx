@@ -47,6 +47,12 @@ const Header = () => {
           </Button>
         </NavbarItem>
         <NavbarItem className=" flex">
+          <Button auto>
+            {" "}
+            <Link to={"/users"}>Users</Link>
+          </Button>
+        </NavbarItem>
+        <NavbarItem className=" flex">
           <Button onClick={handleLogout} auto>
             Log Out
           </Button>

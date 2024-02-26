@@ -22,6 +22,7 @@ const EditEmployee = () => {
           headers: {
             "x-access-token": token,
           },
+          withCredentials: true,
         });
         if (res.status === 200) {
           setEmployee((prevData) => res.data);
@@ -43,6 +44,7 @@ const EditEmployee = () => {
           headers: {
             "x-access-token": token,
           },
+          withCredentials: true,
         });
         if (res.status === 200) {
           setDepartments((prevData) => res.data);
@@ -64,6 +66,7 @@ const EditEmployee = () => {
           headers: {
             "x-access-token": token,
           },
+          withCredentials: true,
         });
         if (res.status === 200) {
           setShifts((prevData) => res.data);
@@ -101,6 +104,7 @@ const EditEmployee = () => {
             headers: {
               "x-access-token": token,
             },
+            withCredentials: true,
           }
         );
         if (res.status === 200) {
@@ -126,6 +130,7 @@ const EditEmployee = () => {
             headers: {
               "x-access-token": token,
             },
+            withCredentials: true,
           }
         );
         if (res.status === 200) {
@@ -155,6 +160,7 @@ const EditEmployee = () => {
           headers: {
             "x-access-token": token,
           },
+          withCredentials: true,
         }
       );
       if (res.status === 200) {
@@ -175,6 +181,7 @@ const EditEmployee = () => {
         headers: {
           "x-access-token": token,
         },
+        withCredentials: true,
       });
       if (res.status === 200) {
         console.log("Employee deleted");

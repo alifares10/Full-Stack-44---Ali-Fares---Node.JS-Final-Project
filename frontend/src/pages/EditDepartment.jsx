@@ -18,6 +18,7 @@ const EditDepartment = () => {
           headers: {
             "x-access-token": token,
           },
+          withCredentials: true,
         });
         if (res.status === 200) {
           setDepartment((prevData) => res.data);
@@ -39,6 +40,7 @@ const EditDepartment = () => {
           headers: {
             "x-access-token": token,
           },
+          withCredentials: true,
         });
         if (res.status === 200) {
           setEmployees((prevData) => res.data);
@@ -68,6 +70,7 @@ const EditDepartment = () => {
             headers: {
               "x-access-token": token,
             },
+            withCredentials: true,
           }
         );
         if (res.status === 200) {
@@ -92,6 +95,7 @@ const EditDepartment = () => {
             headers: {
               "x-access-token": token,
             },
+            withCredentials: true,
           }
         );
         if (res.status === 200) {
@@ -105,6 +109,7 @@ const EditDepartment = () => {
                 headers: {
                   "x-access-token": token,
                 },
+                withCredentials: true,
               }
             );
             if (res.status === 200) {
@@ -139,6 +144,7 @@ const EditDepartment = () => {
           headers: {
             "x-access-token": token,
           },
+          withCredentials: true,
         }
       );
       if (res.status === 200) {
@@ -170,6 +176,7 @@ const EditDepartment = () => {
           headers: {
             "x-access-token": token,
           },
+          withCredentials: true,
         }
       );
       if (res.status === 200) {

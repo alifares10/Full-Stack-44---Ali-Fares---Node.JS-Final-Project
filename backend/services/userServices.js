@@ -42,9 +42,25 @@ const deleteUser = async (id) => {
   }
 };
 
+const getUserCurrnetActions = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const user = await userRepo.getUserById(id);
+    //check if its the current logged user
+    if (req.session.userName === user.fullName) {
+      return req.session.actions;
+    } else {
+      return user.numOfActions;
+    }
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
 module.exports = {
   getAllUsers,
   getUserById,
   createUser,
   deleteUser,
+  getUserCurrnetActions,
 };

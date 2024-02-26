@@ -27,6 +27,7 @@ const AddEmployessToShift = (info) => {
           headers: {
             "x-access-token": token,
           },
+          withCredentials: true,
         }
       );
       if (res.status === 200) {

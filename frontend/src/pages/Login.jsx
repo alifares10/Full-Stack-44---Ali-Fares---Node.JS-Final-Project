@@ -11,36 +11,16 @@ const LogIn = () => {
       e.preventDefault();
       const username = e.target.elements[0].value;
       const email = e.target.elements[1].value;
-      const res = await axios.post("http://localhost:3001/login", {
-        username,
-        email,
-      });
+      const res = await axios.post(
+        "http://localhost:3001/login",
+        {
+          username,
+          email,
+        },
+        { withCredentials: true }
+      );
       if (res.status === 200) {
         const data = res.data;
-        //check if this is the first time logging in
-        const user = await axios.get(
-          `http://localhost:3001/users?fullName=${data.userInfo.name}`,
-          {
-            headers: {
-              "x-access-token": data.accessToken,
-            },
-          }
-        );
-        if (user.data.length === 0) {
-          //create the user in mongodb
-          const response = await axios.post(
-            "http://localhost:3001/users",
-            {
-              fullName: data.userInfo.name,
-            },
-            {
-              headers: {
-                "x-access-token": data.accessToken,
-              },
-            }
-          );
-          console.log("First time log in", response.data);
-        }
         // save data to session storage
         sessionStorage.setItem("Username", data.userInfo.username);
         sessionStorage.setItem("Email", data.userInfo.email);
@@ -54,6 +34,11 @@ const LogIn = () => {
     } catch (error) {
       alert(error.response.data.message);
       console.log(error.response.data.message);
+      //if the user has reached the maximum number of actions
+      if (error.response.status === 403) {
+        document.getElementById("message").innerText =
+          "You Have Reached The Maximum Number Of Actions For Today. Please Try Again Tomorrow.";
+      }
     }
   };
 
@@ -61,6 +46,7 @@ const LogIn = () => {
     <div className=" flex justify-center items-start p-4">
       <div className="flex justify-center items-center flex-col bg-black border">
         <h1 className="text-4xl font-extrabold ">Log In</h1>
+
         <form
           onSubmit={onsSubmit}
           className="flex flex-col justify-center items-center w-full p-4 "
@@ -80,6 +66,11 @@ const LogIn = () => {
           <Button auto type="submit" className="w-80 my-2">
             Log In
           </Button>
+
+          <p
+            id="message"
+            className="text-4xl font-extrabold text-secondary p-2"
+          ></p>
         </form>
       </div>
     </div>

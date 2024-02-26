@@ -40,4 +40,13 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
+router.get("/:id/actions", async (req, res) => {
+  try {
+    const actions = await userService.getUserCurrnetActions(req, res);
+    res.status(200).json(actions);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
 module.exports = router;

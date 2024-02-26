@@ -13,6 +13,7 @@ const ProtectedRoutes = ({ children }) => {
           headers: {
             "x-access-token": token,
           },
+          withCredentials: true,
         });
         if (res.status === 200) {
           console.log("isAuth: true");
