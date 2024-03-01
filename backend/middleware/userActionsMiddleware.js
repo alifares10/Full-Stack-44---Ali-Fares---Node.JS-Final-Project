@@ -2,10 +2,10 @@ const userServices = require("../services/userServices");
 
 const limitAPICalls = async (req, res, next) => {
   // Get user by name from the session
-
   const user = await userServices.getAllUsers({
     fullName: req.session.userName,
   });
+
   if (user.length === 0) {
     return res.status(403).json({
       message: "User not found",

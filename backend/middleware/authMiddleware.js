@@ -10,19 +10,19 @@ const requireAuth = (req, res, next) => {
     // Verify the provided token
     jwt.verify(token, Secret, (err, decodedToken) => {
       if (err) {
-        // If token verification fails, log the error and redirect the user to the login page.
+        // If token verification fails, log the error.
         console.log(`Token verification failed: ${err.message}`);
         res
           .status(500)
           .json("You need to be logged in to access this. Please log in");
       } else {
-        // If token verification is successful, log the decoded token (optional) and proceed.
+        // If token verification is successful.
         console.log(`Middleware Decoded token: ${decodedToken}`);
         next();
       }
     });
   } else {
-    // If no token is provided, redirect the user to the login page.
+    // If no token is provided.
     res
       .status(500)
       .json("No authentication token found. Please log in to continue.");

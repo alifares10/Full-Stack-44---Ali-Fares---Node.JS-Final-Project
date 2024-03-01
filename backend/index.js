@@ -8,9 +8,10 @@ const employeeController = require("./controllers/employeeController");
 const shiftController = require("./controllers/shiftController");
 const employeeShiftsController = require("./controllers/employeeShiftsController");
 const loginController = require("./controllers/loginController");
+const authController = require("./controllers/authController");
 const { requireAuth } = require("./middleware/authMiddleware");
 const { limitAPICalls } = require("./middleware/userActionsMiddleware");
-const { requestLogger } = require("./middleware/requestLogger");
+const { actionsLogger } = require("./middleware/actionsLoggerMiddleware");
 
 require("dotenv").config();
 const Secret = process.env.JWT_SECRET;
@@ -40,12 +41,31 @@ app.use(
   })
 );
 
-app.use("/users", limitAPICalls, requestLogger, userController);
-app.use("/departments", requireAuth, departmentController);
-app.use("/employees", requireAuth, limitAPICalls, employeeController);
-app.use("/shifts", requireAuth, shiftController);
-app.use("/employeeShifts", requireAuth, employeeShiftsController);
+app.use("/users", requireAuth, limitAPICalls, actionsLogger, userController);
+app.use(
+  "/departments",
+  requireAuth,
+  limitAPICalls,
+  actionsLogger,
+  departmentController
+);
+app.use(
+  "/employees",
+  requireAuth,
+  limitAPICalls,
+  actionsLogger,
+  employeeController
+);
+app.use("/shifts", requireAuth, limitAPICalls, actionsLogger, shiftController);
+app.use(
+  "/employeeShifts",
+  requireAuth,
+  limitAPICalls,
+  actionsLogger,
+  employeeShiftsController
+);
 app.use("/login", loginController);
+app.use("/auth", requireAuth, authController);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

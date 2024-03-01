@@ -24,6 +24,7 @@ const Employees = () => {
         });
         if (res.status === 200) {
           setEmployees((prevData) => res.data);
+          console.log("fetching employees");
         } else {
           console.log("Failed to get employees");
         }
@@ -51,6 +52,7 @@ const Employees = () => {
         });
         if (res.status === 200) {
           setDepartments((prevData) => res.data);
+          console.log("fetching departments");
         } else {
           console.log("Failed to get departments");
         }

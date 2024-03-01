@@ -4,7 +4,6 @@ import "./index.css";
 import { NextUIProvider } from "@nextui-org/react";
 import Header from "./components/Header.jsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Home from "./pages/Home";
 import LogIn from "./pages/Login";
 import Employees from "./pages/Employees";
 import EditEmployee from "./pages/EditEmployee.jsx";
@@ -31,7 +30,7 @@ const router = createBrowserRouter([
         path: "/",
         element: (
           <ProtectedRoutes>
-            <Home />
+            <Employees />
           </ProtectedRoutes>
         ),
         errorElement: <NotFound />,

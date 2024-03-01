@@ -9,7 +9,7 @@ const ProtectedRoutes = ({ children }) => {
   useEffect(() => {
     const checkIsAuth = async () => {
       try {
-        const res = await axios.get("http://localhost:3001/departments", {
+        const res = await axios.get("http://localhost:3001/auth", {
           headers: {
             "x-access-token": token,
           },

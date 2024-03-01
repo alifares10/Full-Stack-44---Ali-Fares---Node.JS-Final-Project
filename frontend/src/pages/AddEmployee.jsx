@@ -23,6 +23,11 @@ const AddEmployee = () => {
         }
       } catch (error) {
         console.log(error);
+        //if the user has reached the maximum number of actions
+        if (error.response.status === 403) {
+          window.location.href = "http://localhost:5173/login";
+        }
+        alert(error.response.data.message);
       }
     };
 
@@ -65,38 +70,51 @@ const AddEmployee = () => {
     }
   };
 
-  console.log(departments);
   return (
     <div className="items-center mx-auto flex flex-col justify-center p-4 gap-4 ">
       <h1>Add New Employee</h1>
-      <form
-        className="p-1 border items-center mx-auto justify-center flex flex-col gap-3 "
-        onSubmit={onSubmit}
-      >
-        <div className="flex flex-col gap-3 my-1 py-1">
-          <label htmlFor="firstName">First Name</label>
-          <input type="text" id="firstName" name="firstName" required />
-          <label htmlFor="lastName">Last Name</label>
-          <input type="text" id="lastName" name="lastName" required />
-          <label htmlFor="startYear">Start Year</label>
-          <input type="number" id="startYear" name="startYear" required />
-          <label htmlFor="department">Department</label>
-          <select className="mb-1" id="department" name="department" required>
-            <option value="">Select Department</option>
-            {departments.map((department) => (
-              <option key={department._id} value={department._id}>
-                {department.name}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className="flex gap-2 p-2">
-          <Button type="submit">Add Employee</Button>
-          <Button color="danger" auto>
-            <Link to="/employees">Cancel</Link>
-          </Button>
-        </div>
-      </form>
+      {
+        // if departments are not fetched yet
+        !departments ? (
+          <h1>Loading...</h1>
+        ) : (
+          <>
+            <form
+              className="p-1 border items-center mx-auto justify-center flex flex-col gap-3 "
+              onSubmit={onSubmit}
+            >
+              <div className="flex flex-col gap-3 my-1 py-1">
+                <label htmlFor="firstName">First Name</label>
+                <input type="text" id="firstName" name="firstName" required />
+                <label htmlFor="lastName">Last Name</label>
+                <input type="text" id="lastName" name="lastName" required />
+                <label htmlFor="startYear">Start Year</label>
+                <input type="number" id="startYear" name="startYear" required />
+                <label htmlFor="department">Department</label>
+                <select
+                  className="mb-1"
+                  id="department"
+                  name="department"
+                  required
+                >
+                  <option value="">Select Department</option>
+                  {departments.map((department) => (
+                    <option key={department._id} value={department._id}>
+                      {department.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div className="flex gap-2 p-2">
+                <Button type="submit">Add Employee</Button>
+                <Button color="danger" auto>
+                  <Link to="/employees">Cancel</Link>
+                </Button>
+              </div>
+            </form>
+          </>
+        )
+      }
     </div>
   );
 };

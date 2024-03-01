@@ -4,7 +4,6 @@ import ViewUserActions from "../components/viewUserActions";
 
 const Users = () => {
   const [users, setUsers] = useState([]);
-  const [actions, setActions] = useState([]);
   const token = sessionStorage.getItem("accessToken");
 
   useEffect(() => {
