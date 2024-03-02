@@ -15,6 +15,7 @@ import Departments from "./pages/Departments.jsx";
 import EditDepartment from "./pages/EditDepartment.jsx";
 import AddDepartment from "./pages/addDepartment.jsx";
 import Users from "./pages/Users.jsx";
+import Home from "./pages/Home.jsx";
 
 const router = createBrowserRouter([
   {
@@ -30,7 +31,7 @@ const router = createBrowserRouter([
         path: "/",
         element: (
           <ProtectedRoutes>
-            <Employees />
+            <Home />
           </ProtectedRoutes>
         ),
         errorElement: <NotFound />,

@@ -19,10 +19,11 @@ const ProtectedRoutes = ({ children }) => {
           console.log("isAuth: true");
         } else {
           console.log("isAuth: false");
-          navigate("/login");
+          navigate("/login", { replace: true });
         }
       } catch (error) {
-        navigate("/login");
+        console.log("isAuth: false");
+        navigate("/login", { replace: true });
       }
     };
 
