@@ -29,7 +29,6 @@ const ViewEmployeeShifts = (info) => {
         );
         if (res.status === 200) {
           setEmployeeShifts((prevData) => res.data);
-          console.log("fetching employee shifts");
         } else {
           console.log("Failed to get employee shifts");
         }

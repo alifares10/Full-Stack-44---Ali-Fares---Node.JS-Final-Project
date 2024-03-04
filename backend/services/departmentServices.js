@@ -29,6 +29,7 @@ const createDepartment = async (department) => {
     if (departmentExists.length > 0) {
       throw new Error("Department already exists");
     }
+
     // Create department
     const newDepartment = await departmentRepo.createDepartment(department);
     return newDepartment;
@@ -70,6 +71,7 @@ const deleteDepartment = async (id) => {
   }
 };
 
+//assign department manager
 const assignDepartmentManager = async (departmentID, employeeID) => {
   try {
     //check if department exists
@@ -77,11 +79,13 @@ const assignDepartmentManager = async (departmentID, employeeID) => {
     if (!department) {
       throw new Error("Department not found");
     }
+
     //check if employee exists
     const employee = await employeeRepo.getEmployeeById(employeeID);
     if (!employee) {
       throw new Error("Employee not found");
     }
+
     //check if employee works in this department
     if (employee.departmentID !== departmentID) {
       throw new Error("Employee does not work in this department");
@@ -100,6 +104,7 @@ const assignDepartmentManager = async (departmentID, employeeID) => {
   }
 };
 
+//get the department manager's info
 const getDepartmentManagerInfo = async (id) => {
   try {
     const department = await departmentRepo.getDepartmentById(id);
@@ -110,6 +115,7 @@ const getDepartmentManagerInfo = async (id) => {
   }
 };
 
+//get all employees in a department
 const getDepartmentEmployees = async (id) => {
   try {
     const employees = await employeeRepo.getAllEmployees({ departmentID: id });

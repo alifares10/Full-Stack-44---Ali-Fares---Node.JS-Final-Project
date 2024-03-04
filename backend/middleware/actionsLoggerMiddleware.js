@@ -3,7 +3,7 @@ const { Mutex } = require("async-mutex");
 
 //using a mutex to insure that if there is two actions at the same time, the file will not be corrupted
 const mutex = (() => {
-  console.log("actionsLogger mw mutex");
+  console.log("actionsLogger mutex created");
   return new Mutex();
 })();
 
@@ -11,8 +11,9 @@ const actionsLogger = async (req, res, next) => {
   try {
     //acquire the lock
     const release = await mutex.acquire();
-    const { url } = req;
+
     const userName = req.session.userName.replace(/\s+/g, "");
+    //create a file for each user to log their actions
     const FILE_PATH = `logs/${userName}Actions.json`;
     const maxActions = req.session.maxActions;
     const currentActions = req.session.actions;
@@ -22,7 +23,6 @@ const actionsLogger = async (req, res, next) => {
       actions: [
         {
           userName,
-          url,
           maxActions,
           date: new Date().toISOString().slice(0, 10),
           actionsAllowed: remainingActions,
@@ -60,7 +60,6 @@ const actionsLogger = async (req, res, next) => {
     );
 
     //release the lock
-
     release();
 
     next();

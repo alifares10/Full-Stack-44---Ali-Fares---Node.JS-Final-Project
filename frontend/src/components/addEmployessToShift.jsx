@@ -32,7 +32,7 @@ const AddEmployessToShift = (info) => {
       );
       if (res.status === 200) {
         console.log("Employee added to shift");
-        console.log(res.data);
+        alert("Employee added to shift");
       } else {
         console.log("Failed to add employee to shift");
       }

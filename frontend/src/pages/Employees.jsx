@@ -52,7 +52,6 @@ const Employees = () => {
         });
         if (res.status === 200) {
           setDepartments((prevData) => res.data);
-          console.log("fetching departments");
         } else {
           console.log("Failed to get departments");
         }
@@ -105,7 +104,7 @@ const Employees = () => {
                 <tr>
                   <th className="p-4 border"> Name</th>
 
-                  <th className="border p-4">Department ID</th>
+                  <th className="border p-4">Department</th>
                   <th className="border p-4">Shifts</th>
                 </tr>
               </thead>
@@ -121,7 +120,14 @@ const Employees = () => {
                     <td className="border">
                       {departments.map((department) => {
                         if (department._id === employee.departmentID) {
-                          return department.name;
+                          return (
+                            <Link
+                              key={department._id}
+                              to={`/departments/${department._id}`}
+                            >
+                              {department.name}
+                            </Link>
+                          );
                         }
                       })}
                     </td>
@@ -154,7 +160,14 @@ const Employees = () => {
                     <td className="p-4 border">
                       {departments.map((department) => {
                         if (department._id === employee.departmentID) {
-                          return department.name;
+                          return (
+                            <Link
+                              key={department._id}
+                              to={`/departments/${department._id}`}
+                            >
+                              {department.name}
+                            </Link>
+                          );
                         }
                       })}
                     </td>

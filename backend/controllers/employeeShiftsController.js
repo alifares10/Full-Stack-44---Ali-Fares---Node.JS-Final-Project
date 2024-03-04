@@ -3,6 +3,7 @@ const employeeShiftsService = require("../services/employeeShiftsServices");
 
 const router = express.Router();
 
+// Get all employees Shifts
 router.get("/", async (req, res) => {
   try {
     const filters = req.query;
@@ -15,6 +16,7 @@ router.get("/", async (req, res) => {
   }
 });
 
+// Get employee's shifts by id
 router.get("/:id", async (req, res) => {
   try {
     const employeeShifts = await employeeShiftsService.getEmployeeShiftsById(
@@ -26,17 +28,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-// router.post("/", async (req, res) => {
-//   try {
-//     const newEmployeeShifts = await employeeShiftsService.createEmployeeShifts(
-//       req.body
-//     );
-//     res.status(201).json(newEmployeeShifts);
-//   } catch (error) {
-//     res.status(400).json({ message: error.message });
-//   }
-// });
-
+// update employee's shifts
 router.put("/:id", async (req, res) => {
   try {
     const updatedEmployeeShifts =
@@ -47,6 +39,7 @@ router.put("/:id", async (req, res) => {
   }
 });
 
+// Delete employee's shifts
 router.delete("/:id", async (req, res) => {
   try {
     const deletedEmployeeShifts =

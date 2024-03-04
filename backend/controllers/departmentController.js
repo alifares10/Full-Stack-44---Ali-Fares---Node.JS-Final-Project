@@ -3,6 +3,7 @@ const departmentService = require("../services/departmentServices");
 
 const router = express.Router();
 
+// Get all departments
 router.get("/", async (req, res) => {
   try {
     const filters = req.query;
@@ -13,6 +14,7 @@ router.get("/", async (req, res) => {
   }
 });
 
+// Get department by id
 router.get("/:id", async (req, res) => {
   try {
     const department = await departmentService.getDepartmentById(req.params.id);
@@ -22,6 +24,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+// Create new department
 router.post("/", async (req, res) => {
   try {
     const newDepartment = await departmentService.createDepartment(req.body);
@@ -31,6 +34,7 @@ router.post("/", async (req, res) => {
   }
 });
 
+// Update department
 router.put("/:id", async (req, res) => {
   try {
     const updatedDepartment = await departmentService.updateDepartment(
@@ -43,6 +47,7 @@ router.put("/:id", async (req, res) => {
   }
 });
 
+// Delete department
 router.delete("/:id", async (req, res) => {
   try {
     const deletedDepartment = await departmentService.deleteDepartment(
@@ -54,6 +59,7 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
+// Assign manager to department
 router.put("/:id/manager", async (req, res) => {
   try {
     const updatedDepartment = await departmentService.assignDepartmentManager(
@@ -66,6 +72,7 @@ router.put("/:id/manager", async (req, res) => {
   }
 });
 
+// Get the department manager's info
 router.get("/:id/manager", async (req, res) => {
   try {
     const manager = await departmentService.getDepartmentManagerInfo(
@@ -77,6 +84,7 @@ router.get("/:id/manager", async (req, res) => {
   }
 });
 
+// Get all employees in a department
 router.get("/:id/employees", async (req, res) => {
   try {
     const employees = await departmentService.getDepartmentEmployees(

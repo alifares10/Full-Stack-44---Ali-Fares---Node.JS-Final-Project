@@ -69,27 +69,29 @@ const Shifts = () => {
       ) : (
         <>
           <AddShiftModal />
-          <table className="border w-full text-left">
+          <table className="border w-full text-left table-auto">
             <thead>
               <tr>
-                <th>Shift Date</th>
-                <th>Shift Start</th>
-                <th>Shift End</th>
-                <th>Edit Shift</th>
-                <th>Add Employees</th>
+                <th className="p-2 border">Shift Date</th>
+                <th className="p-2 border">Shift Start</th>
+                <th className="p-2 border">Shift End</th>
+                <th className="p-2 border">Edit Shift</th>
+                <th className="p-2 border">Add Employees</th>
               </tr>
             </thead>
             <tbody className="">
               {shifts.map((shift, index) => {
                 return (
                   <tr key={shift._id}>
-                    <td>{shift.date.substring(0, 10)}</td>
-                    <td>{shift.startingHour}</td>
-                    <td>{shift.endingHour}</td>
-                    <td>
+                    <td className="border p-2">
+                      {shift.date.substring(0, 10)}
+                    </td>
+                    <td className="border p-2">{shift.startingHour}</td>
+                    <td className="border p-2">{shift.endingHour}</td>
+                    <td className="border p-2">
                       <EditShiftModal shift={shift} />
                     </td>
-                    <td>
+                    <td className="border p-2">
                       <AddEmployessToShift
                         employees={employees}
                         shift={shift}

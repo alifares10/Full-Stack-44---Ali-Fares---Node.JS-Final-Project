@@ -26,7 +26,7 @@ const LogIn = () => {
         sessionStorage.setItem("Email", data.userInfo.email);
         sessionStorage.setItem("name", data.userInfo.name);
         sessionStorage.setItem("accessToken", data.accessToken);
-        console.log(data.userInfo);
+
         navigate("/");
       } else {
         console.log("error");

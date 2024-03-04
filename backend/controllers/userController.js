@@ -3,6 +3,7 @@ const userService = require("../services/userServices");
 
 const router = express.Router();
 
+// Get all users
 router.get("/", async (req, res) => {
   try {
     const filters = req.query;
@@ -13,6 +14,7 @@ router.get("/", async (req, res) => {
   }
 });
 
+// Get user by id
 router.get("/:id", async (req, res) => {
   try {
     const user = await userService.getUserById(req.params.id);
@@ -22,6 +24,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+// Create new user
 router.post("/", async (req, res) => {
   try {
     const newUser = await userService.createUser(req.body);
@@ -31,6 +34,7 @@ router.post("/", async (req, res) => {
   }
 });
 
+//delete user
 router.delete("/:id", async (req, res) => {
   try {
     const deletedUser = await userService.deleteUser(req.params.id);
@@ -40,6 +44,7 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
+//get user's current number of actions
 router.get("/:id/actions", async (req, res) => {
   try {
     const actions = await userService.getUserCurrnetActions(req, res);

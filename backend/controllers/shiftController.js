@@ -3,6 +3,7 @@ const shiftService = require("../services/shiftServices");
 
 const router = express.Router();
 
+// Get all shifts
 router.get("/", async (req, res) => {
   try {
     const filters = req.query;
@@ -13,6 +14,7 @@ router.get("/", async (req, res) => {
   }
 });
 
+// Get shift by id
 router.get("/:id", async (req, res) => {
   try {
     const shift = await shiftService.getShiftById(req.params.id);
@@ -22,6 +24,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+// Create new shift
 router.post("/", async (req, res) => {
   try {
     const newShift = await shiftService.createShift(req.body);
@@ -31,6 +34,7 @@ router.post("/", async (req, res) => {
   }
 });
 
+// Update shift
 router.put("/:id", async (req, res) => {
   try {
     const updatedShift = await shiftService.updateShift(
@@ -43,6 +47,7 @@ router.put("/:id", async (req, res) => {
   }
 });
 
+//get employees of a shift
 router.get("/:id/employees", async (req, res) => {
   try {
     const employees = await shiftService.getShiftEmployees(req.params.id);

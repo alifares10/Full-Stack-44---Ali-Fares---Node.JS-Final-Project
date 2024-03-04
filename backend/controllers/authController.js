@@ -3,6 +3,7 @@ const express = require("express");
 
 const router = express.Router();
 
+// Check if user is authenticated
 router.get("/", async (req, res) => {
   try {
     const result = await authSerrvices.isAuth();

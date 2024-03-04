@@ -11,6 +11,8 @@ const login = async (req, res) => {
   try {
     const { username, email } = req.body;
     const { data: users } = await loginRepo.getAllUsersInfo();
+
+    //check if user exists in the database without case sensitivity
     const user = users.find(
       (user) =>
         user.username.toLowerCase() === username.toLowerCase() &&
@@ -23,9 +25,11 @@ const login = async (req, res) => {
     //check if this is first time logging in
     const userExists = await userServices.getAllUsers({ fullName: user.name });
     if (userExists.length === 0) {
+      //create new user in mongoDB
       console.log("Creating new user");
       await userServices.createUser({ fullName: user.name });
     }
+
     //create token
     const token = jwt.sign({ id: username }, Secret, { expiresIn: TokenAge });
 

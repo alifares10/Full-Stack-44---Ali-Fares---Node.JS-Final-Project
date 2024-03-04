@@ -22,24 +22,6 @@ const getEmployeeShiftsById = async (id) => {
   }
 };
 
-// const createEmployeeShifts = async (employeeShifts) => {
-//   //check if employee exists
-//   const employee = await employeeRepo.getEmployeeById(
-//     employeeShifts.employeeId
-//   );
-//   if (!employee) {
-//     throw new Error("Employee does not exist in the employee database");
-//   }
-//   try {
-//     const newEmployeeShifts = await employeeShiftsRepo.createEmployeeShifts(
-//       employeeShifts
-//     );
-//     return newEmployeeShifts;
-//   } catch (error) {
-//     throw new Error(error);
-//   }
-// };
-
 const updateEmployeeShifts = async (id, info) => {
   try {
     //check if employee exists
@@ -47,11 +29,13 @@ const updateEmployeeShifts = async (id, info) => {
     if (!employee) {
       throw new Error("Employee does not exist in the employee database");
     }
+
     //check if shifts exists
     const shift = await shiftRepo.getShiftById(info.shiftId);
     if (!shift) {
       throw new Error("Shift does not exist in the shift database");
     }
+
     const existingEmployeeShifts =
       await employeeShiftsRepo.getAllEmployeeShifts({ employeeId: id });
     existingEmployeeShifts[0].shifts.push(info.shiftId);
@@ -82,5 +66,4 @@ module.exports = {
   getEmployeeShiftsById,
   updateEmployeeShifts,
   deleteEmployeeShifts,
-  // createEmployeeShifts,
 };

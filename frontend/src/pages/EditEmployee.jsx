@@ -91,8 +91,8 @@ const EditEmployee = () => {
     const firstName = e.target.firstName.value;
     const lastName = e.target.lastName.value;
     const startWorkYear = e.target.year.value;
-    console.log(firstName, lastName, startWorkYear, newDepartment);
     if (newDepartment === "") {
+      //if the department is not changed
       try {
         const res = await axios.put(
           `http://localhost:3001/employees/${id}`,
@@ -110,6 +110,7 @@ const EditEmployee = () => {
         );
         if (res.status === 200) {
           console.log("Employee updated");
+          alert("Employee updated");
         } else {
           console.log("Failed to update employee");
         }
@@ -118,6 +119,7 @@ const EditEmployee = () => {
         alert(error.response.data.message);
       }
     } else {
+      //if the department is changed
       try {
         const res = await axios.put(
           `http://localhost:3001/employees/${id}`,
@@ -136,6 +138,7 @@ const EditEmployee = () => {
         );
         if (res.status === 200) {
           console.log("Employee updated");
+          alert("Employee updated");
         } else {
           console.log("Failed to update employee");
         }
@@ -148,7 +151,6 @@ const EditEmployee = () => {
 
   const handleShiftAdd = async (e) => {
     e.preventDefault();
-    console.log(newShift);
     if (newShift === "") {
       alert("Please select a shift");
       return;
@@ -166,6 +168,7 @@ const EditEmployee = () => {
       );
       if (res.status === 200) {
         console.log("Employee added to shift");
+        alert("Employee added to shift");
       } else {
         console.log("Failed to add employee to shift");
       }

@@ -31,7 +31,6 @@ const createShift = async (shift) => {
 
 const updateShift = async (id, shift) => {
   try {
-    //update shift
     const updatedShift = await shiftRepo.updateShift(id, shift);
     return updatedShift;
   } catch (error) {
@@ -42,9 +41,6 @@ const updateShift = async (id, shift) => {
 const getShiftEmployees = async (id) => {
   try {
     const shift = await shiftRepo.getShiftById(id);
-    // const employees = await employeeRepo.getAllEmployees({
-    //   _id: { $in: shift.employees },
-    // });
     const employeesShifts = await employeeShiftsRepo.getAllEmployeeShifts();
     const employees = employeesShifts.filter((employee) =>
       employee.shifts.includes(id)

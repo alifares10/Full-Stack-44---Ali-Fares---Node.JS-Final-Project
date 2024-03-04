@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 
-const URL = "mongodb://127.0.0.1/factoryDB";
+require("dotenv").config();
+
+const URL = process.env.MongoDB_URI;
 
 const connectDB = async () => {
   try {

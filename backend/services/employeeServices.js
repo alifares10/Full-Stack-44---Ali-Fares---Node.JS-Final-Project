@@ -3,7 +3,6 @@ const shiftRepo = require("../repositories/shiftRepository");
 const departmentRepo = require("../repositories/departmentRepository");
 const employyeShiftsRepo = require("../repositories/employeeShiftsRepository");
 
-//get all employees
 const getAllEmployees = async (filters) => {
   try {
     const employees = await employeeRepo.getAllEmployees(filters);
@@ -13,7 +12,6 @@ const getAllEmployees = async (filters) => {
   }
 };
 
-//get employee by id
 const getEmployeeById = async (id) => {
   try {
     const employee = await employeeRepo.getEmployeeById(id);
@@ -23,7 +21,6 @@ const getEmployeeById = async (id) => {
   }
 };
 
-// create employee
 const createEmployee = async (employee) => {
   try {
     // Check if employee already exists
@@ -34,6 +31,7 @@ const createEmployee = async (employee) => {
     if (employeeExists.length > 0) {
       throw new Error("Employee already exists");
     }
+
     //check if department exists
     const department = await departmentRepo.getDepartmentById(
       employee.departmentID
@@ -41,9 +39,11 @@ const createEmployee = async (employee) => {
     if (!department) {
       throw new Error("Department not found");
     }
+
     // create employee
     const newEmployee = await employeeRepo.createEmployee(employee);
-    //create employee id in employeeshifts collection
+
+    //create employee id in employeeShifts collection
     const employeeShifts = {
       employeeId: newEmployee._id,
       shifts: [],
@@ -55,7 +55,6 @@ const createEmployee = async (employee) => {
   }
 };
 
-// update employee info
 const updateEmployee = async (id, employee) => {
   try {
     const updatedEmployee = await employeeRepo.updateEmployee(id, employee);
@@ -65,13 +64,13 @@ const updateEmployee = async (id, employee) => {
   }
 };
 
-// delete employee
 const deleteEmployee = async (id) => {
   try {
     //check if employee is a manager and delete him from departments db
     const departments = await departmentRepo.getAllDepartments({
       manager: id,
     });
+    //if employee is a manager the make the manager field in department empty
     if (departments.length > 0) {
       await Promise.all(
         departments.map(async (department) => {
@@ -81,6 +80,7 @@ const deleteEmployee = async (id) => {
         })
       );
     }
+
     //delete employee from employeeShifts db
     const employeeShifts = await employyeShiftsRepo.getAllEmployeeShifts({
       employeeId: id,
@@ -103,10 +103,12 @@ const getEmployeeShifts = async (id) => {
     if (!employee) {
       throw new Error("Employee not found");
     }
+
     //get employee shifts
     const shifts = await employyeShiftsRepo.getAllEmployeeShifts({
       employeeId: id,
     });
+
     //get shift info
     const info = [];
     await Promise.all(
@@ -129,17 +131,20 @@ const addEmployeeToShift = async (id, info) => {
     if (!employee) {
       throw new Error("Employee does not exist in the employee database");
     }
+
     //check if shifts exists
     const shift = await shiftRepo.getShiftById(info.shiftId);
     if (!shift) {
       throw new Error("Shift does not exist in the shift database");
     }
+
     const existingEmployeeShifts =
       await employyeShiftsRepo.getAllEmployeeShifts({ employeeId: id });
     //check if employee is already in the shift
     if (existingEmployeeShifts[0].shifts.includes(info.shiftId)) {
       throw new Error("Employee already in the shift");
     }
+
     //add employee to shift
     existingEmployeeShifts[0].shifts.push(info.shiftId);
     const newEmployeeShifts = existingEmployeeShifts[0];
@@ -153,6 +158,7 @@ const addEmployeeToShift = async (id, info) => {
   }
 };
 
+//transfer employee to new department
 const transferDepartment = async (id, newDepartment) => {
   try {
     //check if employee exists
@@ -160,11 +166,13 @@ const transferDepartment = async (id, newDepartment) => {
     if (!employee) {
       throw new Error("Employee not found");
     }
+
     //check if department exists
     const department = await departmentRepo.getDepartmentById(newDepartment);
     if (!department) {
       throw new Error("Department not found");
     }
+
     //check if employee is a manager
     const departments = await departmentRepo.getAllDepartments({
       manager: id,
@@ -179,6 +187,7 @@ const transferDepartment = async (id, newDepartment) => {
         })
       );
     }
+
     //transfer employee to new department
     const updatedEmployee = await employeeRepo.updateEmployee(id, {
       departmentID: newDepartment,
