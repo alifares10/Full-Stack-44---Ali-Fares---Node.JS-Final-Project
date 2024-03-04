@@ -19,7 +19,7 @@ MongoDB_URI=your_mongoDB_uri
 
 ```
 
-- run the backend
+- install and run the backend
 
 ```bash
 cd backend
@@ -27,7 +27,7 @@ npm install
 npm run dev
 ```
 
-- run the frontend
+- install and run the frontend
 
 ```bash
 cd frontend
