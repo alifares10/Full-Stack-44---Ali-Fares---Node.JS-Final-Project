@@ -4,13 +4,13 @@ this my final project for the node portion of the full stack course.I created th
 
 ## Installation
 
-first clone the repo
+- clone the repo
 
 ```bash
 git clone
 ```
 
-then create a .env file in the backend folder and add the following
+- create a .env file in the backend folder and add the following
 
 ```bash
 JWT_SECRET=your_secret
@@ -19,7 +19,7 @@ MongoDB_URI=your_mongoDB_uri
 
 ```
 
-then run the backend
+- run the backend
 
 ```bash
 cd backend
@@ -27,7 +27,7 @@ npm install
 npm run dev
 ```
 
-then run the frontend
+- run the frontend
 
 ```bash
 cd frontend
